@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://btxpw3l0cocdw"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_left = 410.0
+offset_top = 575.0
+offset_right = 830.0
+offset_bottom = 615.0
+theme_override_constants/separation = 100
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="GenerateButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+text = "New World"
+
+[node name="SpeedButton" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+text = "INSTANT"
+
+[node name="ExitButton" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 40)
+offset_left = 1082.0
+offset_top = 30.0
+offset_right = 1182.0
+offset_bottom = 70.0
+text = "Exit"

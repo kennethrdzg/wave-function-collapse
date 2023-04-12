@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://clc1mfktlibsx"]
+
+[ext_resource type="Texture2D" uid="uid://3qaoq58vv1k6" path="res://tileset.png" id="1_i0c5d"]
+[ext_resource type="Script" path="res://game.gd" id="2_se5a1"]
+[ext_resource type="PackedScene" uid="uid://btxpw3l0cocdw" path="res://UI/ui.tscn" id="3_0aqqo"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t8gis"]
+texture = ExtResource("1_i0c5d")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_51ja7"]
+sources/0 = SubResource("TileSetAtlasSource_t8gis")
+
+[node name="Game" type="TileMap"]
+texture_filter = 1
+tile_set = SubResource("TileSet_51ja7")
+format = 2
+script = ExtResource("2_se5a1")
+
+[node name="UI" parent="." instance=ExtResource("3_0aqqo")]
+
+[node name="SpeedButton" parent="UI/HBoxContainer" index="1"]
+text = "Speed: Instant"
+
+[connection signal="world_filled" from="." to="." method="_on_world_filled"]
+[connection signal="pressed" from="UI/HBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/SpeedButton" to="." method="_on_speed_button_pressed"]
+[connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]
+
+[editable path="UI"]
