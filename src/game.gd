@@ -22,6 +22,33 @@ enum {
 	FAST
 }
 
+var distributions = {
+	WATER: {
+		WATER: 7, 
+		SAND: 3, 
+		GRASS: 0, 
+		TREE: 0
+	}, 
+	SAND: {
+		WATER: 3, 
+		SAND: 5, 
+		GRASS: 2,
+		TREE: 0
+	}, 
+	GRASS: {
+		WATER: 0, 
+		SAND: 2, 
+		GRASS: 6, 
+		TREE: 2
+	}, 
+	TREE: {
+		WATER: 0, 
+		SAND: 0, 
+		GRASS: 7, 
+		TREE: 3
+	}
+}
+
 signal world_filled
 
 var speed: int = 0: set = set_speed
