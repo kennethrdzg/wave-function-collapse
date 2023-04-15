@@ -101,29 +101,13 @@ func get_full_neighbors(xx: int, yy: int):
 	return neighbors
 	
 func valid_area(cell: Vector2i): 
-	var options = [WATER, SAND, GRASS, TREE]
+	var options = []
 	var neighbors = get_full_neighbors(cell.x, cell.y)
 	for n in neighbors: 
 		var tile = get_cell_atlas_coords(0, n).x
-		match tile: 
-			WATER: 
-				options.erase(GRASS)
-				options.erase(TREE)
-			SAND: 
-				options.erase(TREE)
-			GRASS: 
-				options.erase(WATER)
-			TREE: 
-				options.erase(WATER)
-				options.erase(SAND)
-	if WATER in options: 
-		for i in range(3): 
-			options.append(WATER)
-	if GRASS in options: 
-		for i in range(4): 
-			options.append(GRASS)
-	if SAND in options: 
-		options.append(SAND)
+		for key in distributions[tile]:
+			for i in range(distributions[tile][key]): 
+				options.append(key)
 	return options
 
 func fill_world(): 
