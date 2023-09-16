@@ -23,11 +23,90 @@ script = ExtResource("2_se5a1")
 [node name="UI" parent="." instance=ExtResource("3_0aqqo")]
 
 [node name="SpeedButton" parent="UI/HBoxContainer" index="1"]
-text = "Speed: Instant"
+text = "Speed: Slow"
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+custom_minimum_size = Vector2(360, 0)
+offset_left = 61.0
+offset_top = 386.0
+offset_right = 357.0
+offset_bottom = 558.0
+
+[node name="Probabilities" type="HBoxContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer/Probabilities"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/PanelContainer/Probabilities/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Sea"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/PanelContainer/Probabilities/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Coast"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="UI/PanelContainer/Probabilities/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Land"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="UI/PanelContainer/Probabilities/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Mountain"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/PanelContainer/Probabilities"]
+layout_mode = 2
+
+[node name="SeaSlider" type="HSlider" parent="UI/PanelContainer/Probabilities/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="CoastSlider" type="HSlider" parent="UI/PanelContainer/Probabilities/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="LandSlider" type="HSlider" parent="UI/PanelContainer/Probabilities/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="MountainSlider" type="HSlider" parent="UI/PanelContainer/Probabilities/VBoxContainer2"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 1.0
 
 [connection signal="world_filled" from="." to="." method="_on_world_filled"]
 [connection signal="pressed" from="UI/HBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/SpeedButton" to="." method="_on_speed_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/ScreenshotButton" to="." method="_on_screenshot_button_pressed"]
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/SeaSlider" to="." method="_on_sea_slider_drag_ended"]
+[connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/CoastSlider" to="." method="_on_coast_slider_drag_ended"]
+[connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/LandSlider" to="." method="_on_land_slider_drag_ended"]
+[connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/MountainSlider" to="." method="_on_mountain_slider_drag_ended"]
 
 [editable path="UI"]
