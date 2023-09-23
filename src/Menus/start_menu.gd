@@ -10,3 +10,7 @@ func _on_credits_button_pressed():
 
 func _on_hide_credits_button_pressed():
 	credits.visible = false
+
+
+func _on_exit_button_pressed():
+	get_tree().quit()
