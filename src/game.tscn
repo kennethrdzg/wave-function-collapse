@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://clc1mfktlibsx"]
+[gd_scene load_steps=5 format=3 uid="uid://clc1mfktlibsx"]
 
 [ext_resource type="Texture2D" uid="uid://3qaoq58vv1k6" path="res://tileset.png" id="1_i0c5d"]
 [ext_resource type="Script" path="res://game.gd" id="2_se5a1"]
-[ext_resource type="PackedScene" uid="uid://btxpw3l0cocdw" path="res://UI/ui.tscn" id="3_0aqqo"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t8gis"]
 texture = ExtResource("1_i0c5d")
@@ -20,16 +19,44 @@ tile_set = SubResource("TileSet_51ja7")
 format = 2
 script = ExtResource("2_se5a1")
 
-[node name="UI" parent="." instance=ExtResource("3_0aqqo")]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="SpeedButton" parent="UI/HBoxContainer" index="1"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 980.0
+offset_bottom = 660.0
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="CreateWorldButton" type="Button" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "Create World"
+
+[node name="SpeedButton" type="Button" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
 text = "Speed: Slow"
+
+[node name="ScreenshotButton" type="Button" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(160, 60)
+layout_mode = 2
+text = "Take Screenshot"
+
+[node name="ExitButton" type="Button" parent="UI"]
+custom_minimum_size = Vector2(60, 40)
+offset_left = 1160.0
+offset_top = 20.0
+offset_right = 1220.0
+offset_bottom = 60.0
+text = "Exit"
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
 custom_minimum_size = Vector2(360, 0)
 offset_left = 61.0
 offset_top = 386.0
-offset_right = 357.0
+offset_right = 421.0
 offset_bottom = 558.0
 
 [node name="Probabilities" type="HBoxContainer" parent="UI/PanelContainer"]
@@ -100,7 +127,7 @@ max_value = 10.0
 value = 1.0
 
 [connection signal="world_filled" from="." to="." method="_on_world_filled"]
-[connection signal="pressed" from="UI/HBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/CreateWorldButton" to="." method="_on_create_world_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/SpeedButton" to="." method="_on_speed_button_pressed"]
 [connection signal="pressed" from="UI/HBoxContainer/ScreenshotButton" to="." method="_on_screenshot_button_pressed"]
 [connection signal="pressed" from="UI/ExitButton" to="." method="_on_exit_button_pressed"]
@@ -108,5 +135,3 @@ value = 1.0
 [connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/CoastSlider" to="." method="_on_coast_slider_drag_ended"]
 [connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/LandSlider" to="." method="_on_land_slider_drag_ended"]
 [connection signal="drag_ended" from="UI/PanelContainer/Probabilities/VBoxContainer2/MountainSlider" to="." method="_on_mountain_slider_drag_ended"]
-
-[editable path="UI"]

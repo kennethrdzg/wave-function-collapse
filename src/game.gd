@@ -7,7 +7,7 @@ var stack: Array[Vector2i] = []
 
 @onready var ui: CanvasLayer = get_node("UI")
 
-@onready var generate_button: Button = get_node("UI/HBoxContainer/GenerateButton")
+@onready var generate_button: Button = get_node("UI/HBoxContainer/CreateWorldButton")
 @onready var speed_button: Button = get_node("UI/HBoxContainer/SpeedButton")
 @onready var screenshot_button: Button = get_node("UI/HBoxContainer/ScreenshotButton")
 
@@ -48,6 +48,7 @@ signal world_filled
 
 var speed: int = SLOW: set = set_speed
 var timer_speed = 0.1
+var image: Image = null
 
 func _ready():
 	room_width = ProjectSettings.get("display/window/size/viewport_width")/16
@@ -175,16 +176,8 @@ func _on_world_filled():
 func _on_speed_button_pressed():
 	self.speed += 1
 
-func _on_generate_button_pressed():
-	generate_button.disabled = true
-	screenshot_button.disabled = true
-	clean()
-	fill_world()
-
-
 func _on_exit_button_pressed():
 	get_tree().change_scene_to_file("res://Menus/start_menu.tscn")
-
 
 func _on_sea_slider_drag_ended(value_changed):
 	if value_changed: 
@@ -206,15 +199,23 @@ func _on_mountain_slider_drag_ended(value_changed):
 
 
 func _on_screenshot_button_pressed():
-	
 	ui.hide()
-	
-	await get_tree().create_timer(1).timeout
-	
+	var os_name = OS.get_name()
 	var viewport: Viewport = get_viewport()
-	var result = viewport.get_texture().get_image().save_png("user://screenshot_"+str(Time.get_unix_time_from_system())+".png")
-	viewport.get_texture().get_image()
+	var path: String = "wfc_"+str(Time.get_unix_time_from_system()) + ".png"
 	await get_tree().create_timer(1).timeout
+	image = viewport.get_texture().get_image()
 	
+	if os_name == "Web": 
+		var buffer: PackedByteArray = image.save_png_to_buffer() 
+		JavaScriptBridge.download_buffer(buffer, path, "image/png")
+	else: 
+		print("FIle")
+		print(image.save_png("user://"+path))
 	ui.show()
-	#viewport.get_texture().get_image().save_png("user://")
+
+func _on_create_world_button_pressed():
+	generate_button.disabled = true
+	screenshot_button.disabled = true
+	clean()
+	fill_world()
