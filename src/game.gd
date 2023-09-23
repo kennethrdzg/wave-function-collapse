@@ -132,6 +132,12 @@ func fill_world():
 	
 	while xx != -1 and yy != -1: 
 		var valid_tiles = get_valid_tiles(xx, yy)
+		if valid_tiles.size() <= 0: 
+			clean()
+			tiles_to_check = []
+			xx = randi() % room_width
+			yy = randi() % room_height
+			continue
 		
 		set_cell(0, Vector2i(xx, yy), 0, Vector2i(get_probability_distribution(valid_tiles).pick_random(), 0))
 		
