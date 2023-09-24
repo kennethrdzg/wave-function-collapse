@@ -216,8 +216,7 @@ func _on_screenshot_button_pressed():
 		var buffer: PackedByteArray = image.save_png_to_buffer() 
 		JavaScriptBridge.download_buffer(buffer, path, "image/png")
 	else: 
-		print("FIle")
-		print(image.save_png("user://"+path))
+		image.save_png("user://"+path)
 	ui.show()
 
 func _on_create_world_button_pressed():
